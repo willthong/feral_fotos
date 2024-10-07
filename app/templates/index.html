@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload a photo!</title>
+    </head>
+
+    <body>
+        <p>
+            Right, gimme your photo
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.photo.label }}<br>
+                {{ form.photo() }}<br>
+                {% for error in form.photo.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <br>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+
+    </body>
+
+</html>

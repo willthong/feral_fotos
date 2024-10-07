@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "feral-fotos"
+version = "0.1.0"
+description = "Upload photos. Forward them on."
+license = "MIT"
+authors = [
+    "Will Thong <will@willthong.com>"
+]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask-wtf = "^1.2.1"
+Flask = "^3.0.3"
+werkzeug = "^3.0.4"
+
+[tool.poetry.group.dev.dependencies]
+flask-shell-ipython = "0.5.3"
+
+[build-system]
+# Should be the same as $POETRY_VERSION
+requires = ["poetry-core>=1.8"]
+build-backend = "poetry.core.masonry.api"
