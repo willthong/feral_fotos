@@ -53,12 +53,6 @@ jobs:
           cache-to: type=gha,mode=max
 
 
-# # Deploy script on server should:
-# # 1. Download Docker image
-# # 2. Run Docker image with ports mapped appropriately
-# # 3. Configure Caddy to HOST variable
-# # 4. 
-
   deploy-server:
     needs: build
     runs-on: [self-hosted, X64]
@@ -69,8 +63,8 @@ jobs:
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/static
       - name: Copy static files
         run: |
-          cp -r ./app/static \
-          ${{ secrets.weddingwrangle_location }}/app/static
+          cp -r app/static/* \
+          ${{ secrets.APP_FOLDER }}/app/static
       - name: Create uploads folder
         run: touch ${{ secrets.APP_FOLDER }}/uploads
       - name: Visit app folder
@@ -98,6 +92,8 @@ jobs:
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ghcr.io/{{github.actor}}/feral_fotos:master \
             gunicorn feral_fotos.wsgi:application --bind 0.0.0.0:8005 --timeout 600
+      - name: Configure Caddy
+        run: ls -ltrh
 
   deploy-client:
     needs: build
@@ -117,5 +113,3 @@ jobs:
         run: systemctl daemon-reload && systemctl enable feral_fotos
       - name: Start service
         run: systemctl start-service feral_fotos
-
-# # Pi needs to be a GitHub runner; add to new group
