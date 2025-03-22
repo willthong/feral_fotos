@@ -33,7 +33,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ env.GHCR_TOKEN }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Extract Docker metadata
         id: meta
@@ -61,7 +61,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: [self-hosted, x64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -98,6 +98,13 @@ jobs:
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ghcr.io/{{github.actor}}/feral_fotos:master \
             gunicorn feral_fotos.wsgi:application --bind 0.0.0.0:8005 --timeout 600
+            #needs: build
+            #runs-on: [self-hosted, pi]
+            #steps:
+            #  - name: Checkout repository
+            #    uses: actions/checkout@v4
+            #  - name: Copy script
+            #  - name: Make script executable
 
 # # Config steps
 # # Pi needs to be a GitHub runner; add to new group
