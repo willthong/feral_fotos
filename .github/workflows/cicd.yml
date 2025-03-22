@@ -59,8 +59,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Make directory
+      - name: Make static directory
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/static
+      - name: Make uploads directory
+        run: mkdir -p ${{ secrets.APP_FOLDER }}/app/uploads
       - name: Copy static files
         run: |
           cp -r app/static/* \
