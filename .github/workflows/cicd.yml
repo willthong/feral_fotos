@@ -63,6 +63,10 @@ jobs:
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/static
       - name: Make uploads directory
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/uploads
+      - name: Copy static files
+        run: |
+          cp -r app/static/* \
+          ${{ secrets.APP_FOLDER }}/app/static
       - name: Visit app folder
         run: cd ${{ secrets.APP_FOLDER }}
       - name: Force recreate
