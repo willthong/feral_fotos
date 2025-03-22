@@ -59,7 +59,7 @@ jobs:
 # # 3. Configure Caddy to HOST variable
 # # 4. 
 
-  deploy:
+  deploy-server:
     needs: build
     runs-on: [self-hosted, x64]
     steps:
@@ -98,6 +98,8 @@ jobs:
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ghcr.io/{{github.actor}}/feral_fotos:master \
             gunicorn feral_fotos.wsgi:application --bind 0.0.0.0:8005 --timeout 600
+
+  deploy-client:
     needs: build
     runs-on: [self-hosted, pi]
     steps:
