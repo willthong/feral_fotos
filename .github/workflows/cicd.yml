@@ -63,12 +63,6 @@ jobs:
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/static
       - name: Make uploads directory
         run: mkdir -p ${{ secrets.APP_FOLDER }}/app/uploads
-      - name: Copy static files
-        run: |
-          cp -r app/static/* \
-          ${{ secrets.APP_FOLDER }}/app/static
-      - name: Create uploads folder
-        run: touch ${{ secrets.APP_FOLDER }}/uploads
       - name: Visit app folder
         run: cd ${{ secrets.APP_FOLDER }}
       - name: Force recreate
@@ -89,8 +83,8 @@ jobs:
           docker run -d \
             --name feral_fotos \
             -p 8005:8005 \
-            -v $(pwd)/uploads:/usr/src/app/uploads \
-            -v $(pwd)/app/static:/usr/src/app/static \
+            -v $(pwd)/app/uploads:/app/uploads \
+            -v $(pwd)/app/static:/app/static \
             -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
