@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  LETSENCRYPT_HOST: willthong.com
+  LETSENCRYPT_HOST: ${{ secrets.HOSTNAME }}
 
 
 jobs:
