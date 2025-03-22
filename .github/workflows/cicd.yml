@@ -95,7 +95,7 @@ jobs:
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ${{ needs.build.outputs.image_name }} \
-            poetry run gunicorn app:app --bind 0.0.0.0:8005 
+            gunicorn app:app --bind 0.0.0.0:8005 
 
   deploy-client:
     needs: build

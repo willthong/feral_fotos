@@ -9,4 +9,4 @@ RUN poetry install
 COPY . ./
 
 EXPOSE 8000
-ENTRYPOINT ["poetry run gunicorn -b :8005 --access-logfile - --error-logfile - app:app"]
+ENTRYPOINT ["gunicorn -b :8005 --access-logfile - --error-logfile - app:app"]
