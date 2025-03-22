@@ -8,5 +8,5 @@ COPY pyproject.toml ./
 RUN poetry install
 COPY . ./
 
-EXPOSE 8000
-ENTRYPOINT ["gunicorn -b :8005 --access-logfile - --error-logfile - app:app"]
+EXPOSE 8005
+ENTRYPOINT ["gunicorn", "app:app"]
