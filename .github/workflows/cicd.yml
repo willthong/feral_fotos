@@ -90,10 +90,8 @@ jobs:
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
-            ghcr.io/{{github.actor}}/feral_fotos:master \
+            {{ needs.build.outputs.image_name }} \
             gunicorn feral_fotos.wsgi:application --bind 0.0.0.0:8005 --timeout 600
-      - name: Configure Caddy
-        run: ls -ltrh
 
   deploy-client:
     needs: build
