@@ -98,21 +98,22 @@ jobs:
             -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ghcr.io/{{github.actor}}/feral_fotos:master \
             gunicorn feral_fotos.wsgi:application --bind 0.0.0.0:8005 --timeout 600
-            #needs: build
-            #runs-on: [self-hosted, pi]
-            #steps:
-            #  - name: Checkout repository
-            #    uses: actions/checkout@v4
-            #  - name: Copy script
-            #  - name: Make script executable
+    needs: build
+    runs-on: [self-hosted, pi]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Make binary directory
+        run: mkdir /usr/local/bin
+      - name: Copy script
+        run: cp ./client.service /usr/local/bin/feral_fotos_client.service
+      - name: Make script executable
+        run: chmod +x /usr/local/bin/feral_fotos_client.service
+      - name: Copy service file
+        run: cp client.service /etc/systemd/user/feral_fotos.service
+      - name: Enable service
+        run: systemctl daemon-reload && systemctl enable feral_fotos
+      - name: Start service
+        run: systemctl start-service feral_fotos
 
-# # Config steps
 # # Pi needs to be a GitHub runner; add to new group
-# # (death_and_gravity already is a GitHub runner)
-
-# # Deploy script on client should:
-# # 1. Copy client.sh to /usr/local/bin
-# # 2. Copy client.service to /etc/systemd/user/feral_fotos.service
-# # 3. systemctl daemon-reload
-# # 4. systemctl start feral_fotos
-# # 5. systemctl enable feral_fotos
