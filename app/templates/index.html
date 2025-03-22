@@ -2,6 +2,27 @@
 <html>
     <head>
         <title>Upload a photo!</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+        <style>
+            #image-container {
+                max-width: 500px;
+                margin: 20px 0;
+                display: none;
+            }
+            
+            #preview-image {
+                display: block;
+                max-width: 100%;
+            }
+            
+            .buttons {
+                margin: 15px 0;
+            }
+            
+            #cropper-container {
+                margin-top: 20px;
+            }
+        </style>
     </head>
 
     <body>
@@ -9,21 +30,132 @@
             Right, gimme your photo
         </p>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="upload-form">
             {{ form.hidden_tag() }}
             <div>
                 {{ form.photo.label }}<br>
-                {{ form.photo() }}<br>
+                {{ form.photo(id="photo-input", onchange="handleFileSelect(event)") }}<br>
                 {% for error in form.photo.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </div>
+            
+            <!-- Container for the cropper -->
+            <div id="cropper-container">
+                <div id="image-container">
+                    <img id="preview-image" src="">
+                </div>
+                <div class="buttons" id="crop-buttons" style="display: none;">
+                    <button type="button" id="crop-button">Crop Image</button>
+                    <button type="button" id="reset-button">Reset</button>
+                </div>
+            </div>
+            
+            <!-- Hidden input to store the cropped image data -->
+            <input type="hidden" id="cropped-data" name="cropped-data">
+            
             <br>
             <div>
-                {{ form.submit() }}
+                {{ form.submit(id="submit-button", disabled=true) }}
             </div>
         </form>
 
+        <!-- Add Cropper.js and dependencies -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+        <script>
+            let cropper;
+            const photoInput = document.getElementById('photo-input');
+            const previewImage = document.getElementById('preview-image');
+            const imageContainer = document.getElementById('image-container');
+            const cropButtons = document.getElementById('crop-buttons');
+            const submitButton = document.getElementById('submit-button');
+            const croppedDataInput = document.getElementById('cropped-data');
+            const uploadForm = document.getElementById('upload-form');
+            
+            // Handle file selection
+            function handleFileSelect(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                
+                // Clear any existing cropped data
+                croppedDataInput.value = '';
+                submitButton.disabled = true;
+                
+                // Create a FileReader to read the selected image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Set the image source and show the container
+                    previewImage.src = e.target.result;
+                    imageContainer.style.display = 'block';
+                    cropButtons.style.display = 'block';
+                    
+                    // Destroy existing cropper if it exists
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    
+                    // Initialize Cropper.js with the aspect ratio
+                    cropper = new Cropper(previewImage, {
+                        aspectRatio: 60 / 72.5,
+                        viewMode: 1,
+                        guides: true,
+                        autoCropArea: 0.8,
+                        responsive: true
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            // Handle crop button click
+            document.getElementById('crop-button').addEventListener('click', function() {
+                if (!cropper) return;
+                
+                // Get the cropped canvas data
+                const canvas = cropper.getCroppedCanvas({
+                    width: 600,  // Adjust as needed while maintaining the ratio
+                    height: 725  // Adjust as needed while maintaining the ratio
+                });
+                
+                if (canvas) {
+                    // Convert canvas to data URL and store in hidden input
+                    const dataURL = canvas.toDataURL('image/jpeg');
+                    croppedDataInput.value = dataURL;
+                    
+                    // Show a preview of the cropped image
+                    previewImage.src = dataURL;
+                    
+                    // Destroy the cropper and enable submit
+                    cropper.destroy();
+                    cropper = null;
+                    submitButton.disabled = false;
+                    
+                    // Change button text to indicate cropping is done
+                    document.getElementById('crop-button').textContent = 'Crop';
+                }
+            });
+            
+            // Handle reset button click
+            document.getElementById('reset-button').addEventListener('click', function() {
+                if (cropper) {
+                    cropper.destroy();
+                }
+                
+                // Clear the form and reset everything
+                photoInput.value = '';
+                previewImage.src = '';
+                imageContainer.style.display = 'none';
+                cropButtons.style.display = 'none';
+                croppedDataInput.value = '';
+                submitButton.disabled = true;
+            });
+            
+            // Override form submission to handle the cropped data
+            uploadForm.addEventListener('submit', function(e) {
+                if (!croppedDataInput.value) {
+                    e.preventDefault();
+                    alert('Please crop your image before uploading');
+                }
+            });
+        </script>
     </body>
-
 </html>
