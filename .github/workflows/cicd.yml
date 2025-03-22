@@ -87,7 +87,7 @@ jobs:
           docker run -d \
             --name feral_fotos \
             -p 8005:8005 \
-            -v $(pwd)/uploads:/usr/src/uploads \
+            -v $(pwd)/uploads:/usr/src/app/uploads \
             -v $(pwd)/app/static:/usr/src/app/static \
             -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \

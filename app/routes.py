@@ -52,7 +52,7 @@ def save_photo(image, filename: str, cropped=False):
     if cropped:
         filename += "_cropped"
     filename += "." + extension.lower()
-    image.save(os.path.join("uploads", filename))
+    image.save(os.path.join("./app/uploads", filename))
     return
 
 
