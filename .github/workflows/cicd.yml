@@ -47,6 +47,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
@@ -79,8 +80,6 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Debug available images
         run: |
-          echo "Available images:"
-          docker images | grep feral_fotos
           echo "Image from build job: ${{ needs.build.outputs.image_name }}"
       - name: Pull container
         run: docker pull ${{ needs.build.outputs.image_name }}
