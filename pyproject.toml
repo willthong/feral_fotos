@@ -14,6 +14,7 @@ flask-wtf = "^1.2.1"
 Flask = "^3.0.3"
 werkzeug = "^3.0.4"
 gunicorn = "^23.0.0"
+pillow = "^11.1.0"
 
 [tool.poetry.group.dev.dependencies]
 flask-shell-ipython = "0.5.3"

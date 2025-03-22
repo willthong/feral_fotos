@@ -7,7 +7,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  LETSENCRYPT_HOST: ${{ secrets.HOSTNAME }}
 
 
 jobs:
@@ -93,7 +92,6 @@ jobs:
             -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
-            -e LETSENCRYPT_HOST="${{ env.LETSENCRYPT_HOST }}" \
             ${{ needs.build.outputs.image_name }} \
             gunicorn app:app --bind 0.0.0.0:8005 
 
