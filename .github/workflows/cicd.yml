@@ -60,13 +60,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Make static directory
-        run: mkdir -p ${{ secrets.APP_FOLDER }}/app/static
+        run: mkdir -p ${{ secrets.APP_FOLDER }}/static
       - name: Make uploads directory
-        run: mkdir -p ${{ secrets.APP_FOLDER }}/app/uploads
+        run: mkdir -p ${{ secrets.APP_FOLDER }}/uploads
       - name: Copy static files
         run: |
           cp -r app/static/* \
-          ${{ secrets.APP_FOLDER }}/app/static
+          ${{ secrets.APP_FOLDER }}/static
       - name: Visit app folder
         run: cd ${{ secrets.APP_FOLDER }}
       - name: Force recreate
@@ -87,8 +87,8 @@ jobs:
           docker run -d \
             --name feral_fotos \
             -p 8005:8005 \
-            -v $(pwd)/app/uploads:/app/uploads \
-            -v $(pwd)/app/static:/app/static \
+            -v $(pwd)/uploads:/app/uploads \
+            -v $(pwd)/static:/app/static \
             -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
