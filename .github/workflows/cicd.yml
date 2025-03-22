@@ -77,6 +77,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
+      - name: Debug available images
+        run: |
+          echo "Available images:"
+          docker images | grep feral_fotos
+          echo "Image from build job: ${{ needs.build.outputs.image_name }}"
       - name: Pull container
         run: docker pull ${{ needs.build.outputs.image_name }}
       - name: Start Docker container
