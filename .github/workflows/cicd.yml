@@ -110,6 +110,6 @@ jobs:
       - name: Copy service file
         run: sudo cp client.service /etc/systemd/user/feral_fotos.service
       - name: Enable service
-        run: sudo systemctl daemon-reload && sudo systemctl enable feral_fotos
+        run: sudo systemctl daemon-reload && sudo systemctl enable feral_fotos_client
       - name: Start service
         run: sudo systemctl start-service feral_fotos
