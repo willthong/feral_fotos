@@ -112,7 +112,7 @@ def success():
 def get_image():
     if len(queue) == 0:
         photo_available = False
-        return
+        return jsonify(0)
     next_image = queue[0]
 
     @after_this_request

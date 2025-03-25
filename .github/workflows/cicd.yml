@@ -115,6 +115,8 @@ jobs:
         run: |
           sudo install -m 644 client.service \
           /etc/systemd/system/feral_fotos_client.service
+      - name: Enable printer
+        run: sudo lpoptions -d Canon_SELPHY_CP1300
       - name: Reload systemctl
         run: sudo systemctl daemon-reload 
       - name: Enable service
