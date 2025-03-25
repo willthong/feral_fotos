@@ -10,8 +10,8 @@ check_server() {
         return
     # If there's a photo to download, grab it
     wget -O temporary_photo.jpg "$FERAL_FOTOS_HOST"/get_photo?api_key="$API_KEY"
-    # print_command temporary_photo.jpg
-    rm temporary_photo.jpg
+    lp -o portrait -o fit-to-page -o media=jpn_hagaki_100x148mm ./temporary_photo.jpg
+    rm ./temporary_photo.jpg
     sleep "$DELAY"s
     return
 }
@@ -19,4 +19,3 @@ check_server() {
 while true; do
     check_server
 done
-
