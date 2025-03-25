@@ -104,7 +104,7 @@ jobs:
       - name: Make binary directory
         run: mkdir -p /usr/local/bin
       - name: Copy script
-        run: sudo cp ./client.service /usr/local/bin/feral_fotos_client.sh
+        run: sudo cp ./client.sh /usr/local/bin/feral_fotos_client.sh
       - name: Make script executable
         run: sudo chmod +x /usr/local/bin/feral_fotos_client.sh
       - name: Copy service file
