@@ -112,6 +112,6 @@ jobs:
       - name: Reload systemctl
         run: sudo systemctl daemon-reload 
       - name: Enable service
-        run: sudo systemctl --user enable feral_fotos_client
+        run: systemctl enable feral_fotos_client
       - name: Start service
-        run: sudo systemctl start-service feral_fotos
+        run: systemctl start-service feral_fotos_client
