@@ -5,7 +5,7 @@ DELAY=50
 
 check_server() {
     # Ask the server if there's something there
-    if [[ $(curl -s $FERAL_FOTOS_HOST/photo_available != "1") ]]; then
+    if [[ $(curl -s $FERAL_FOTOS_HOST/photo_available) != "1" ]]; then
         sleep 1s
         return
     # If there's a photo to download, grab it
