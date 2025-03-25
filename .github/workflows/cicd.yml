@@ -102,7 +102,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Make binary directory
-        run: mkdir /usr/local/bin
+        run: mkdir -p /usr/local/bin
       - name: Copy script
         run: cp ./client.service /usr/local/bin/feral_fotos_client.service
       - name: Make script executable
