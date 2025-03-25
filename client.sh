@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /etc/environment
+
 # Selphy takes 46 seconds.
 DELAY=50
 
