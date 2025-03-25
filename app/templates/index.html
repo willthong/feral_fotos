@@ -172,13 +172,9 @@
   </style>
 </head>
 <body>
-
   <div class="header-container"><img src="/static/header.png" alt="Header Image" class="img-fluid"></div>
   <div class="main-wrapper">
-    <!-- Left Sidebar (Responsive) -->
-    <aside class="sidebar-left d-none d-lg-block"></aside><!-- Main Content Area -->
     <main class="content-area">
-
       <p>Will wrote this app as a knock-off Chinese version of an Instax Link Printer or Polaroid Lab - except this one won't make you download an app!</p>
       <p>Upload and crop a photo you've taken on your phone below, and it'll be added to the queue. Photos take about a minute to be printed, although that is of course dependent on demand from other guests.</p>
       <form method="post" enctype="multipart/form-data" id="upload-form" name="upload-form">
@@ -199,13 +195,11 @@
           {{ form.submit(id="submit-button", disabled=true) }}
         </div>
       </form>
-
-    </main><!-- Right Sidebar (Responsive) -->
-    <aside class="sidebar-right d-none d-lg-block"></aside>
-  </div>
-  <!-- Add Cropper.js and dependencies -->
+    </main>
+  </div><!-- Add Cropper.js and dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script> 
   <script>
+
 
             let cropper;
             const photoInput = document.getElementById('photo-input');

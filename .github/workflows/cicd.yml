@@ -104,12 +104,12 @@ jobs:
       - name: Make binary directory
         run: mkdir -p /usr/local/bin
       - name: Copy script
-        run: cp ./client.service /usr/local/bin/feral_fotos_client.service
+        run: sudo cp ./client.service /usr/local/bin/feral_fotos_client.sh
       - name: Make script executable
-        run: chmod +x /usr/local/bin/feral_fotos_client.service
+        run: sudo chmod +x /usr/local/bin/feral_fotos_client.sh
       - name: Copy service file
-        run: cp client.service /etc/systemd/user/feral_fotos.service
+        run: sudo cp client.service /etc/systemd/user/feral_fotos.service
       - name: Enable service
-        run: systemctl daemon-reload && systemctl enable feral_fotos
+        run: sudo systemctl daemon-reload && sudo systemctl enable feral_fotos
       - name: Start service
-        run: systemctl start-service feral_fotos
+        run: sudo systemctl start-service feral_fotos
