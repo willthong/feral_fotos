@@ -97,7 +97,7 @@ jobs:
 
   deploy-client:
     needs: build
-    runs-on: [self-hosted, pi]
+    runs-on: [self-hosted, ARM64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
