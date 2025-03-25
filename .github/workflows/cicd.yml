@@ -108,7 +108,9 @@ jobs:
       - name: Make script executable
         run: sudo chmod +x /usr/local/bin/feral_fotos_client.sh
       - name: Copy service file
-        run: sudo install -m 644 client.service /etc/systemd/system/feral_fotos.service
+        run: |
+          sudo install -m 644 client.service 
+          /etc/systemd/system/feral_fotos_client.service
       - name: Reload systemctl
         run: sudo systemctl daemon-reload 
       - name: Enable service
