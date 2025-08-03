@@ -81,23 +81,27 @@ require_write_api_key = require_api_key("WRITE")
 @app.route("/index", methods=["GET", "POST"])
 @require_write_api_key
 def index():
-    form = PhotoForm()
+    if request.method == "POST":
+        form = PhotoForm()
 
-    if form.validate_on_submit():
-        file = form.photo.data
-        original_filename = secure_filename(file.filename)
-        save_photo(file, original_filename, cropped=False)
+        if form.validate_on_submit():
+            file = form.photo.data
+            original_filename = secure_filename(file.filename)
+            save_photo(file, original_filename, cropped=False)
 
-        cropped_data = request.form.get("cropped-data")
-        image_data = cropped_data.split(",")[1]
-        decoded_data = base64.b64decode(image_data)
-        image = Image.open(io.BytesIO(decoded_data))
-        save_photo(image, original_filename, cropped=True)
+            cropped_data = request.form.get("cropped-data")
+            image_data = cropped_data.split(",")[1]
+            decoded_data = base64.b64decode(image_data)
+            image = Image.open(io.BytesIO(decoded_data))
+            save_photo(image, original_filename, cropped=True)
 
-        photo_with_border = add_border(image)
-        queue.append(photo_with_border)
+            photo_with_border = add_border(image)
+            queue.append(photo_with_border)
 
-        return redirect(url_for("success"))
+            return redirect(url_for("success"))
+
+    else:
+        form = PhotoForm(formdata=None)
 
     return render_template("index.html", form=form)
 

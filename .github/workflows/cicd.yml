@@ -93,7 +93,7 @@ jobs:
             -e READ_API_KEY="${{ secrets.READ_API_KEY }}" \
             -e WRITE_API_KEY="${{ secrets.WRITE_API_KEY }}" \
             ${{ needs.build.outputs.image_name }} \
-            gunicorn app:app --bind 0.0.0.0:8005 
+            gunicorn app:app --bind 0.0.0.0:8005 --timeout 120
 
   deploy-client:
     needs: build

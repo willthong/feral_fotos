@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html>
 <head>
   <title>Feral Fotos - upload a photo!</title>
@@ -40,9 +40,9 @@
 
             body {
                 font-family: var(--bs-body-font-family) !important;
-                background-image: url("/static/background_image.png");
-                background-position: center;
-                background-size: cover;
+                <!-- background-image: url("/static/background_image.png"); -->
+                <!-- background-position: center; -->
+                <!-- background-size: cover; -->
                 background-attachment: fixed;
                 display: flex;
                 flex-direction: column;
@@ -60,10 +60,22 @@
                 font-display: swap;
             }
 
+            @font-face {
+                font-family: "Noto";
+                src: url("/static/fonts/NotoSerif.ttf") format("truetype");
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: "Playfair";
+                src: url("/static/fonts/PlayfairDisplay.ttf") format("truetype");
+                font-display: swap;
+            }
+
             :root {
-                --bs-body-font-family: 'Charis', serif;
-                --bs-headings-font-family: 'Felix', serif;
-                --bs-body-color: #287b79;
+                --bs-body-font-family: 'Noto', serif;
+                --bs-headings-font-family: 'PlayfairDisplay', serif;
+                <!-- --bs-body-color: #287b79; -->
             }
 
             h1, h2, h3, h4, h5, h6 {
@@ -72,10 +84,10 @@
 
             body {
                 font-family: var(--bs-body-font-family) !important;
-                background-image: url("/static/background_image.png");
-                background-position: center;
-                background-size: cover;
-                background-attachment: fixed;
+                <!-- background-image: url("/static/background_image.png"); -->
+                <!-- background-position: center; -->
+                <!-- background-size: cover; -->
+                <!-- background-attachment: fixed; -->
                 display: flex;
                 flex-direction: column;
             }
@@ -111,7 +123,7 @@
             }
 
             .sidebar-left {
-                background-image: url("/static/sidebar_left.png");
+                <!-- background-image: url("/static/sidebar_left.png"); -->
                 background-size: cover;
                 position: fixed;
                 top: 300px;
@@ -123,7 +135,7 @@
             }
 
             .sidebar-right {
-                background-image: url("/static/sidebar_right.png");
+                <!-- background-image: url("/static/sidebar_right.png"); -->
                 background-size: cover;
                 position: fixed;
                 top: 300px;
@@ -185,8 +197,7 @@
   <div class="header-container"><img src="/static/header.png" alt="Header Image" class="img-fluid"></div>
   <div class="main-wrapper">
     <main class="content-area">
-      <p>Will wrote this app as a knock-off Chinese version of an Instax Link Printer or Polaroid Lab - except this one won't make you download an app!</p>
-      <p>Upload and crop a photo you've taken on your phone below, and it'll be added to the queue. Photos take about a minute to be printed, although that is of course dependent on demand from other guests.</p>
+      <p>Upload and crop a photo you've taken on your phone below, and it'll be added to the queue, then saved to our wedding album. Photos take about a minute to be printed, although that is of course dependent on demand from other guests.</p>
       <form method="post" enctype="multipart/form-data" id="upload-form" name="upload-form">
         {{ form.hidden_tag() }}
         <div>

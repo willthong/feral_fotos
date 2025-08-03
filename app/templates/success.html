@@ -39,21 +39,21 @@
             }
 
             @font-face {
-                font-family: "Charis";
-                src: url("/static/fonts/CharisSILR.ttf") format("truetype");
+                font-family: "Noto";
+                src: url("/static/fonts/NotoSerif.ttf") format("truetype");
                 font-display: swap;
             }
 
             @font-face {
-                font-family: "Felix";
-                src: url("/static/fonts/felixtitlingmt.ttf") format("truetype");
+                font-family: "Playfair";
+                src: url("/static/fonts/PlayfairDisplay.ttf") format("truetype");
                 font-display: swap;
             }
 
             :root {
-                --bs-body-font-family: 'Charis', serif;
-                --bs-headings-font-family: 'Felix', serif;
-                --bs-body-color: #287b79;
+                --bs-body-font-family: 'Noto', serif;
+                --bs-headings-font-family: 'PlayfairDisplay', serif;
+                <!-- --bs-body-color: #287b79; -->
             }
 
             h1, h2, h3, h4, h5, h6 {
@@ -62,10 +62,10 @@
 
             body {
                 font-family: var(--bs-body-font-family) !important;
-                background-image: url("/static/background_image.png");
-                background-position: center;
-                background-size: cover;
-                background-attachment: fixed;
+                <!-- background-image: url("/static/background_image.png"); -->
+                <!-- background-position: center; -->
+                <!-- background-size: cover; -->
+                <!-- background-attachment: fixed; -->
                 display: flex;
                 flex-direction: column;
             }
@@ -101,7 +101,7 @@
             }
 
             .sidebar-left {
-                background-image: url("/static/sidebar_left.png");
+                <!-- background-image: url("/static/sidebar_left.png"); -->
                 background-size: cover;
                 position: fixed;
                 top: 300px;
@@ -113,7 +113,7 @@
             }
 
             .sidebar-right {
-                background-image: url("/static/sidebar_right.png");
+                <!-- background-image: url("/static/sidebar_right.png"); -->
                 background-size: cover;
                 position: fixed;
                 top: 300px;
