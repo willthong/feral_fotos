@@ -4,6 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
+User=pi
 Restart=on-failure
 RestartSec=30s
 ExecStart=/usr/local/bin/feral_fotos_client.sh
