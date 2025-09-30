@@ -2,6 +2,7 @@
 
 source /etc/environment
 
+PRINTER_NAME="Canon_Selphy_CP1300"
 # Selphy takes 46 seconds.
 DELAY=50
 
@@ -13,7 +14,13 @@ check_server() {
     fi
     # If there's a photo to download, grab it
     wget -O temporary_photo.jpg "$FERAL_FOTOS_HOST"/get_photo?read_api_key="$API_KEY"
-    lp -o fit-to-page -o PageSize=Postcard -o orientation-requested=3 ./temporary_photo.jpg  
+    # Reset 
+    cupsenable $PRINTER_NAME
+    lp \
+        -o fit-to-page \
+        -o PageSize=Postcard \
+        -o orientation-requested=3 \
+        ./temporary_photo.jpg  
     rm ./temporary_photo.jpg
     sleep "$DELAY"s
     return
