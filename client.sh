@@ -15,7 +15,6 @@ check_server() {
     # If there's a photo to download, grab it
     wget -O temporary_photo.jpg "$FERAL_FOTOS_HOST"/get_photo?read_api_key="$API_KEY"
     # Reset 
-    cupsenable $PRINTER_NAME
     lp \
         -o fit-to-page \
         -o PageSize=Postcard \
@@ -27,5 +26,6 @@ check_server() {
 }
 
 while true; do
+    cupsenable Canon_Selphy_CP1300
     check_server
 done
