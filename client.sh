@@ -2,7 +2,6 @@
 
 source /etc/environment
 
-PRINTER_NAME="Canon_Selphy_CP1300"
 # Selphy takes 46 seconds.
 DELAY=50
 
@@ -26,6 +25,6 @@ check_server() {
 }
 
 while true; do
-    cupsenable Canon_Selphy_CP1300
+    /usr/sbin/cupsenable Canon_Selphy_CP1300
     check_server
 done
