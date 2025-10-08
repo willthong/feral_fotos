@@ -101,10 +101,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Clear variables
+        run: sudo echo "" > /etc/environment
       - name: Set host variable
         run: echo "FERAL_FOTOS_HOST=${{ secrets.HOSTNAME }}" | sudo tee -a /etc/environment
       - name: Set API key variable
         run: echo "API_KEY=${{ secrets.READ_API_KEY }}" | sudo tee -a /etc/environment
+      - name: Set APPLY_BORDER variable
+        run: echo "APPLY_BORDER=${{ variables.APPLY_BORDER }}" | sudo tee -a /etc/environment
       - name: Make binary directory
         run: mkdir -p /usr/local/bin
       - name: Copy script

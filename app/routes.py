@@ -31,16 +31,21 @@ PHOTO_COORDINATES = (LEFT_MARGIN, TOP_MARGIN)
 
 queue = []
 photo_available = False
+APPLY_BORDER = app.config.get('APPLY_BORDER')
 
 
-def add_border(photo: Image.Image) -> Image.Image:
+def process_photo(photo: Image.Image):
     photo = ImageOps.exif_transpose(photo)
-    photo = photo.resize((PHOTO_WIDTH, PHOTO_HEIGHT))
-    template = Image.open("photobooth-template.png")
-    template.paste(photo, box=PHOTO_COORDINATES)
-    template = template.convert("RGB")
+    if APPLY_BORDER:
+        photo_resized = photo.resize((PHOTO_WIDTH, PHOTO_HEIGHT))
+        template = Image.open("photobooth-template.png")
+        template.paste(photo_resized, box=PHOTO_COORDINATES)
+        photo = template.convert("RGB")
+    else:
+        photo = photo.convert("RGB")
+
     image_io = io.BytesIO()
-    template.save(image_io, "JPEG", quality=100)
+    photo.save(image_io, "JPEG", quality=100)
     image_io.seek(0)
     return image_io
 
@@ -95,7 +100,7 @@ def index():
             image = Image.open(io.BytesIO(decoded_data))
             save_photo(image, original_filename, cropped=True)
 
-            photo_with_border = add_border(image)
+            photo_with_border = process_photo(image)
             queue.append(photo_with_border)
 
             return redirect(url_for("success"))
