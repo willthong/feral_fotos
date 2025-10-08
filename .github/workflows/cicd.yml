@@ -108,7 +108,7 @@ jobs:
       - name: Set API key variable
         run: echo "API_KEY=${{ secrets.READ_API_KEY }}" | sudo tee -a /etc/environment
       - name: Set APPLY_BORDER variable
-        run: echo "APPLY_BORDER=${{ variables.APPLY_BORDER }}" | sudo tee -a /etc/environment
+        run: echo "APPLY_BORDER=${{ env.APPLY_BORDER }}" | sudo tee -a /etc/environment
       - name: Make binary directory
         run: mkdir -p /usr/local/bin
       - name: Copy script
