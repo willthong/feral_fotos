@@ -102,7 +102,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Clear variables
-        run: sudo echo "" > /etc/environment
+        run: sudo rm -rf /etc/environment && sudo touch /etc/environment
       - name: Set host variable
         run: echo "FERAL_FOTOS_HOST=${{ secrets.HOSTNAME }}" | sudo tee -a /etc/environment
       - name: Set API key variable
