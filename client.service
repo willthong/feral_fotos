@@ -8,6 +8,7 @@ User=pi
 Restart=on-failure
 RestartSec=30s
 ExecStart=/usr/local/bin/feral_fotos_client.sh
+WorkingDirectory=/home/pi/
 
 [Install]
 WantedBy=multi-user.target

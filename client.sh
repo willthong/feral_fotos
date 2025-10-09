@@ -25,6 +25,5 @@ check_server() {
 }
 
 while true; do
-    /usr/sbin/cupsenable Canon_Selphy_CP1300
     check_server
 done
